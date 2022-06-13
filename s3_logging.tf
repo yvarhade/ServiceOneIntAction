@@ -25,3 +25,7 @@ resource "aws_s3_bucket" "examplebucket60" {
 resource "aws_s3_bucket" "examplebucket61" {
   bucket = "examplebuckettftest61"
 }
+
+resource "aws_s3_bucket" "examplebucket70" {
+  bucket = "examplebuckettftest70"
+}
