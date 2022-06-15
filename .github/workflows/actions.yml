@@ -3,22 +3,22 @@ on:
   pull_request:
     types: [opened]
   workflow_dispatch :
-env :
-  API_URL : "https://int.api.zscwp.io"
-  AUTH_URL : "https://z-cwp-int.us.auth0.com"
+  push :
+    branches:
+      - 'main'
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses : ZscalerCWP/Zscaler-IaC-Action@v0.3.1
+      - uses : ZscalerCWP/Zscaler-IaC-Action@v1.0.0
         id : iac-scan
         with:
           client_id : ${{ secrets.ZSCANNER_CLIENT_ID }}
           client_secret : ${{ secrets.ZSCANNER_CLIENT_SECRET }}
           fail_build : 'true'
           output_format : 'human+github-sarif'
-          region : 'CUSTOM'
+          region : 'US'
           log_level : 'debug'
       - run : echo ${{ steps.iac-scan.outputs.sarif_file_path }}
       - name: Upload SARIF file
